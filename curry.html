@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Currying de funciones</title>
+</head>
+<body>
+	<script>
+		(function () {
+			var toArray = function (x) {
+				return Array.prototype.slice.call(X);
+			}
+
+			var curry = function (fn, args) {
+				return function () {
+					return fn.apply(this, args.concat(toArray(arguments)));
+				}
+			}
+
+			var autoCurry = function (fn, numArgs) {
+				numArgs = numArgs || fn.length;
+				return function () {
+					if (arguments.length < numArgs) {
+						return autoCurry(
+							curry(fun, toArray(arguments)),
+							numArgs - arguments.length
+						);
+					} else {
+						return fn.apply(this, arguments);
+					}
+				}
+			}
+			Function.prototype.autoCurry = function(n) {
+				return autoCurry(this, n);
+			};
+		})();
+	</script>
+</body>
+</html>
